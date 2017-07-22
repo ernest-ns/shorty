@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20170721201920) do
   create_table "url_mappings", force: :cascade do |t|
     t.string "shortcode", null: false
     t.text "url", null: false
-    t.integer "redirect_count", null: false
+    t.integer "redirect_count", default: 0, null: false
     t.datetime "start_date", null: false
-    t.datetime "last_seen_date", null: false
+    t.datetime "last_seen_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
