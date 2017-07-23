@@ -37,6 +37,26 @@ Shooooort::Shorty.controllers :url_mappings do
 
   post :shorten, :map => '/shorten', :provides => [:json] do
     content_type :json
+
+    url_mapping = UrlMapping.create({url: params[:url], shortcode: params[:shortcode]})
+
+    #binding.pry
+    unless(url_mapping.errors[:url].blank?)
+      halt 400, {error: 400, description: url_mapping.errors[:url].join(",")}.to_json
+    end
+
+    #binding.pry
+    if(url_mapping.errors[:shortcode].include?("The shortcode fails to meet the following regexp: ^[0-9a-zA-Z_]{4,}$"))
+      halt 422, {error: 422, description:"The shortcode fails to meet the following regexp: ^[0-9a-zA-Z_]{4,}$" }.to_json
+    end
+
+
+    if(url_mapping.errors[:shortcode].include?("The the desired shortcode is already in use. Shortcodes are case-sensitive."))
+      halt 409, {error: 409, description:"The the desired shortcode is already in use. Shortcodes are case-sensitive." }.to_json
+    end
+
+    status 201
+    {"shortcode" => url_mapping.shortcode}.to_json
   end
 
 end

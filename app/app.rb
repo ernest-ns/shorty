@@ -6,7 +6,7 @@ module Shooooort
     enable :sessions
 
     get "/" do
-      'Hello World! OK!'
+      render 'index'
     end
 
     ##

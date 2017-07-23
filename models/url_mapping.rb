@@ -6,7 +6,7 @@ class UrlMapping < ActiveRecord::Base
   validates :shortcode, uniqueness: {message: "The the desired shortcode is already in use. Shortcodes are case-sensitive."}
   validate :shortcode_follows_format
   validates :url, presence: {message: "url is not present"}
-  validates :url, format: { with: URI.regexp }, if: 'url.present?'
+#  validates :url, format: { with: URI.regexp }, if: 'url.present?'
 
   def generate_start_date
     self.start_date = Time.now if self.start_date.blank?
