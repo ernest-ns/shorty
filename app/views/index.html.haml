@@ -1,1 +1,58 @@
-= "HEllo"
+.main-container
+  .from-container.col-md-12.col-sm-12.col-lg-12
+    .form
+      .url.col-md-9.col-sm-9.col-lg-9
+        %input{:placeholder => "Paste the link you want to shorten here", :class => "url-field rounded-borders form-control", :type=>"text", :required => true}
+      .action.col-md-3.col-sm-3.col-lg-3
+        %input{:class => "submit-button rounded-borders btn", :type=>"button", :value => "Shorten this link"}
+  .history.col-md-12.col-sm-12.col-lg-12
+    .header.col-md-8
+      .heading.col-md-8 Previously shortened by you
+      .clear-history.col-md-4 Clear history
+    %table.url-list.table
+      %thead
+        %tr
+          %th.col-md-8 LINK
+          %th.col-md-2.text-center VISITS
+          %th.col-md-2.text-center LAST VISITED
+      %tbody
+        %tr.shortened-url
+          %td.col-md-8
+            %span.base-url shooooort.com/
+            %span.shortcode fca1ec3
+          %td.col-md-2.text-center.visits{:rowspan => 2} 1140
+          %td.col-md-2.text-center.last-visited{:rowspan => 2} 2 days ago
+        %tr.orignal-url
+          %td.col-md-8{:colspan => 2} https://blog.twitter.com/engineering/en_us/a/2015/hand...
+        %tr.shortened-url
+          %td.col-md-8
+            %span.base-url shooooort.com/
+            %span.shortcode fca1ec3
+          %td.col-md-2.text-center.visits{:rowspan => 2} 483
+          %td.col-md-2.text-center.last-visited{:rowspan => 2} 7 minutes ago
+        %tr.orignal-url
+          %td.col-md-8{:colspan => 2} https://blog.twitter.com/engineering/en_us/a/2015/hand...
+        %tr.shortened-url
+          %td.col-md-8
+            %span.base-url shooooort.com/
+            %span.shortcode fca1ec3
+          %td.col-md-2.text-center.visits{:rowspan => 2} 1140
+          %td.col-md-2.text-center.last-visited{:rowspan => 2} 2 days ago
+        %tr.orignal-url
+          %td.col-md-8{:colspan => 2} https://blog.twitter.com/engineering/en_us/a/2015/hand...
+        %tr.shortened-url
+          %td.col-md-8
+            %span.base-url shooooort.com/
+            %span.shortcode fca1ec3
+          %td.col-md-2.text-center.visits{:rowspan => 2} 483
+          %td.col-md-2.text-center.last-visited{:rowspan => 2} 7 minutes ago
+        %tr.orignal-url
+          %td.col-md-8{:colspan => 2} https://blog.twitter.com/engineering/en_us/a/2015/hand...
+        %tr.shortened-url
+          %td.col-md-8
+            %span.base-url shooooort.com/
+            %span.shortcode fca1ec3
+          %td.col-md-2.text-center.visits{:rowspan => 2} 483
+          %td.col-md-2.text-center.last-visited{:rowspan => 2} 7 minutes ago
+        %tr.orignal-url
+          %td.col-md-8{:colspan => 2} https://blog.twitter.com/engineering/en_us/a/2015/hand...

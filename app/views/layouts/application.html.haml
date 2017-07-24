@@ -1,0 +1,22 @@
+!!! Strict
+%html
+  %head
+    %title
+      = [@title, "Padrino Sample Blog"].compact.join(" | ")
+
+    = stylesheet_link_tag 'normalize', 'bootstrap', 'bootstrap-theme', 'application'
+    = javascript_include_tag 'jquery-3.2.1','jquery-ujs','bootstrap','application'
+    = yield_content :include
+    %body
+      #header.container
+        .left-space.col-md-2.col-lg-2.col-sm-2.col-xs-2
+        .content-area.col-md-8.col-lg-8.col-sm-8.col-xs.2
+          .website-name
+            .website-title.col-md-7.col-lg-7 Shooooort
+            .website-tagline.col-md-5.col-lg-5.text-right The link shortner with a long name
+        .right-space.col-md-2.col-lg-2.col-sm-2.col-xs-2
+      #container.container
+        .left-space.col-md-2.col-lg-2.col-sm-2.col-xs-2
+        .content-area.col-md-8.col-lg-8.col-sm-8.col-xs.2
+          #main= yield
+        .right-space.col-md-2.col-lg-2.col-sm-2.col-xs-2

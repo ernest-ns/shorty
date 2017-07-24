@@ -1,0 +1,153 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/fonts/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Light';
+    src: url('/fonts/Roboto-Light.ttf') format('truetype');
+    font-weight: lighter;
+    font-style: normal;
+}
+
+.rounded-borders {
+    -webkit-border-radius: 3px;
+  /* Firefox 1-3.6 */
+    -moz-border-radius: 3px;
+  /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+    border-radius: 3px;
+}
+
+.body{
+    font-family: "Roboto-Light";
+    font-size: 16px;
+}
+
+#main{
+    padding-top: 50px;
+}
+.website-title{
+    font-family: "Montserrat";
+    font-size: 43px;
+    color: #EB4A42;
+    text-decoration: underline;
+}
+
+.website-tagline{
+    font-family: "Roboto-Light";
+    font-size: 16px;
+    color: #AAAAAA;
+    margin-top: 30px;
+}
+
+.url .url-field{
+    width:  100%;
+    font-family: "Roboto-Light";
+    font-size: 16px;
+    color: #BBBBBB;
+    height: 41px;
+    border-color: transparent;
+    background-color: #EAEAEA;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+}
+
+.url .url-field::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #BBBBBB;
+}
+.url .url-field:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #BBBBBB;
+   opacity:  1;
+}
+.url .url-field::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #BBBBBB;
+   opacity:  1;
+}
+.url .url-field:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #BBBBBB;
+}
+.url .url-field::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #BBBBBB;
+}
+
+.website-name{
+    margin-top: 65px;
+}
+
+.submit-button{
+    background-color: #EB4A42;
+    color: #FFF;
+    font-family: "Roboto-Light";
+    font-size: 16px;
+    height: 41px;
+    width: 100%;
+}
+
+.history{
+    padding-top: 50px;
+}
+
+.header .heading{
+    font-family: "Roboto-Light";
+    font-size: 22px;
+    color: #555555;
+}
+
+.header, .header .heading{
+    padding-left: 0px;
+}
+
+.header .clear-history{
+    color: #EB4A42;
+    font-family: "Roboto-Light";
+    font-size: 16px;
+    margin-top: 6px;
+}
+
+.form .url{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.history .table thead th,
+.history .table tbody td{
+    border: none;
+    padding-left: 0px;
+}
+
+.history .table thead th{
+    font-family: "Roboto-Light";
+    font-size: 14px;
+    color: #AAAAAA;
+    padding-top: 32px;
+    padding-bottom: 15px;
+}
+
+.history .table tr.shortened-url td{
+    font-family: "Roboto-Light";
+    font-size: 16px;
+    color: #555555;
+    padding-bottom: 2px;
+}
+
+.history .table tr.shortened-url td.visits,
+.history .table tr.shortened-url td.last-visited{
+    padding-top: 20px;
+}
+
+.history .table tr.shortened-url td span.shortcode{
+    color: #EB4A42;
+    margin-left: -3px;
+}
+
+.history .table tr.orignal-url td{
+    font-family: "Roboto-Light";
+    font-size: 16px;
+    color: #CCCCCC;
+    padding-top: 2px;
+    padding-bottom: 25px;
+}
