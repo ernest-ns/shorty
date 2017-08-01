@@ -25,6 +25,7 @@ var app = app || {};
       var attr = Backbone.Model.prototype.toJSON.call(this);
       attr.url = this.displayableUrl(attr.url);
       attr.lastSeenDate = this.displayableDate(attr.lastSeenDate);
+      attr.clickableUrl = this.clickableUrl();
       return attr;
     },
     displayableUrl: function(url){
@@ -32,6 +33,9 @@ var app = app || {};
         url = url.substring(0,49)+"...";
       }
       return url;
+    },
+    clickableUrl: function(){
+      return window.location.host + '/' + this.get('shortcode');
     },
     displayableDate: function(date){
       if(_.isEmpty(date)){

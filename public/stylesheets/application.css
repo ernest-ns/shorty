@@ -135,6 +135,26 @@
     padding-bottom: 2px;
 }
 
+.history .table tr.shortened-url td a{
+    color: inherit;
+    padding-left: 0px;
+}
+
+.history .table tr.shortened-url td .click-to-copy{
+    font-family: "Roboto-Light";
+    font-size: 16px;
+    color: #eb4a42;
+    display: none;
+}
+
+.history .table tr.shortened-url td.show-copy-link .click-to-copy{
+    display: block;
+}
+
+.history .table tr.shortened-url td a:hover{
+    text-decoration: none;
+}
+
 .history .table tr.shortened-url td.visits,
 .history .table tr.shortened-url td.last-visited{
     padding-top: 20px;

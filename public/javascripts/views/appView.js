@@ -66,7 +66,7 @@ var app = app || {};
       var _this = this;
       var urlMappingView = new app.UrlMappingView({model: model });
       this.$el.find('.url-list.table').find('tbody').append(urlMappingView.render());
-
+      urlMappingView.bindEvents();
       urlMappingView.model.fetch();
     },
     newAttributes: function () {
