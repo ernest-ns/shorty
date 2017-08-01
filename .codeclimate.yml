@@ -1,0 +1,7 @@
+exclude_paths:
+- "public/javascripts/jquery*"
+- "public/javascripts/bootstrap.js"
+- "public/javascripts/bootstrap.css"
+- "public/javascripts/underscore.js"
+- "public/javascripts/backbone.js"
+- "public/javascripts/bootstrap-theme.css"
