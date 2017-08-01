@@ -5,18 +5,18 @@ RSpec.describe "/url_mappings" do
     let(:random_shortcode) {"a_#{SecureRandom.random_number(9999)}asd"}
     context "when both url and shortcode is passed" do
       it "creates a new url mapping" do
-        expect(lambda {post "/shorten", { "url" => "http://example.com", "shortcode" => random_shortcode }}).to change{UrlMapping.count}.by(1)
+        expect(lambda {post "/shorten", { "url" => "http://example.com", "shortcode" => random_shortcode }.to_json}).to change{UrlMapping.count}.by(1)
         expect(last_response.status).to eq 201
       end
     end
 
     context "when the url is not passed" do
       it "does not create a url mapping" do
-        expect(lambda {post "/shorten", { "shortcode" => random_shortcode }}).to change{UrlMapping.count}.by(0)
+        expect(lambda {post "/shorten", { "shortcode" => random_shortcode }.to_json}).to change{UrlMapping.count}.by(0)
       end
 
       it "retuns a 400 status with description" do
-        post "/shorten", {"shortcode" => random_shortcode }
+        post "/shorten", {"shortcode" => random_shortcode }.to_json
         expect(last_response.status).to eq 400
         error_description = JSON.parse(last_response.body)["description"]
         expect(error_description).to eq("url is not present")
@@ -28,11 +28,11 @@ RSpec.describe "/url_mappings" do
         UrlMapping.create({url: "https://www.example.org", shortcode: random_shortcode})
       end
       it "does not create a url mapping" do
-        expect(lambda {post "/shorten", { "url" => "www.example.org","shortcode" => random_shortcode }}).to change{UrlMapping.count}.by(0)
+        expect(lambda {post "/shorten", { "url" => "www.example.org","shortcode" => random_shortcode }.to_json}).to change{UrlMapping.count}.by(0)
       end
 
       it "returns a 409 status" do
-        post "/shorten", {"url" => "http://www.example.org", "shortcode" => random_shortcode }
+        post "/shorten", {"url" => "http://www.example.org", "shortcode" => random_shortcode }.to_json
         expect(last_response.status).to eq 409
         error_description = JSON.parse(last_response.body)["description"]
         expect(error_description).to eq("The the desired shortcode is already in use. Shortcodes are case-sensitive.")
@@ -42,11 +42,11 @@ RSpec.describe "/url_mappings" do
     context "the shortcode is not valid" do
       let(:invalid_shortcode) {"abc"}
       it "does not create a url mapping" do
-        expect(lambda {post "/shorten", { "url" => "www.example.org","shortcode" => invalid_shortcode }}).to change{UrlMapping.count}.by(0)
+        expect(lambda {post "/shorten", { "url" => "www.example.org","shortcode" => invalid_shortcode }.to_json}).to change{UrlMapping.count}.by(0)
       end
 
       it "returns a 422 status" do
-        post "/shorten", {"url" => "http://www.example.org", "shortcode" => invalid_shortcode }
+        post "/shorten", {"url" => "http://www.example.org", "shortcode" => invalid_shortcode }.to_json
         expect(last_response.status).to eq 422
         error_description = JSON.parse(last_response.body)["description"]
         expect(error_description).to eq("The shortcode fails to meet the following regexp: ^[0-9a-zA-Z_]{4,}$")
@@ -55,16 +55,16 @@ RSpec.describe "/url_mappings" do
 
     context "when the shorcode is not passed" do
       it "creates a url mapping" do
-        expect {post "/shorten", { "url" => "http://www.example.org" }}.to change{UrlMapping.count}.by(1)
+        expect {post "/shorten", { "url" => "http://www.example.org" }.to_json}.to change{UrlMapping.count}.by(1)
       end
 
       it "returns a 201 status" do
-        post "/shorten", {"url" => "http://www.example.org"}
+        post "/shorten", {"url" => "http://www.example.org"}.to_json
         expect(last_response.status).to eq 201
       end
 
       it "generates a shortcode" do
-post "/shorten", {"url" => "http://www.example.org"}
+        post "/shorten", {"url" => "http://www.example.org"}.to_json
         expect(last_response.status).to eq 201
         parsed_response = JSON.parse(last_response.body)
         expect(parsed_response["shortcode"]).to_not be nil

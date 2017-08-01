@@ -5,7 +5,7 @@
       = [@title, "Padrino Sample Blog"].compact.join(" | ")
 
     = stylesheet_link_tag 'normalize', 'bootstrap', 'bootstrap-theme', 'application'
-    = javascript_include_tag 'jquery-3.2.1','jquery-ujs','bootstrap','application'
+    = javascript_include_tag 'jquery-3.2.1','jquery-ujs','bootstrap', 'timeago','underscore', 'backbone', 'models/urlMapping', 'collections/urlMappings','views/appView','views/urlMappingView','routers/router', 'application'
     = yield_content :include
     %body
       #header.container

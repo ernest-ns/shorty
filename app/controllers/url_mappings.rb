@@ -21,6 +21,7 @@ Shooooort::Shorty.controllers :url_mappings do
 
   get :show, :map => '/:shortcode', :provides => [:json] do
     content_type :json
+
     @url_mapping = UrlMapping.lookup(params[:shortcode])
     halt 404, {error: 404, description: "The shortcode cannot be found in the system"}.to_json unless @url_mapping
     redirect @url_mapping.url
@@ -28,6 +29,7 @@ Shooooort::Shorty.controllers :url_mappings do
 
   get :stats, :map => '/:shortcode/stats', :provides => [:json] do
     content_type :json
+
     @url_mapping = UrlMapping.where(shortcode: params[:shortcode]).take
     halt 404, {error: 404, description: "The shortcode cannot be found in the system"}.to_json unless @url_mapping
     last_seen_date = {}
@@ -37,15 +39,14 @@ Shooooort::Shorty.controllers :url_mappings do
 
   post :shorten, :map => '/shorten', :provides => [:json] do
     content_type :json
+    request_body = JSON.parse(request.body.read.to_s).with_indifferent_access
 
-    url_mapping = UrlMapping.create({url: params[:url], shortcode: params[:shortcode]})
+    url_mapping = UrlMapping.create({url: request_body[:url], shortcode: request_body[:shortcode]})
 
-    #binding.pry
     unless(url_mapping.errors[:url].blank?)
       halt 400, {error: 400, description: url_mapping.errors[:url].join(",")}.to_json
     end
 
-    #binding.pry
     if(url_mapping.errors[:shortcode].include?("The shortcode fails to meet the following regexp: ^[0-9a-zA-Z_]{4,}$"))
       halt 422, {error: 422, description:"The shortcode fails to meet the following regexp: ^[0-9a-zA-Z_]{4,}$" }.to_json
     end
@@ -58,5 +59,4 @@ Shooooort::Shorty.controllers :url_mappings do
     status 201
     {"shortcode" => url_mapping.shortcode}.to_json
   end
-
 end
