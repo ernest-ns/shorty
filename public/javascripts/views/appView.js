@@ -4,27 +4,19 @@ var app = app || {};
 (function ($) {
   'use strict';
 
-  // The Application
-  // ---------------
-
-  // Our overall **AppView** is the top-level piece of UI.
   app.AppView = Backbone.View.extend({
 
     el: '.main-container',
 
-    // Delegated events for creating new items, and clearing completed ones.
+
     events: {
       'click .submit-button': 'createOnEnter',
       'click .clear-history': 'clearHistory'
     },
 
-    // At initialization we bind to the relevant events on the `Todos`
-    // collection, when items are added or changed. Kick things off by
-    // loading any preexisting todos that might be saved in *localStorage*.
     initialize: function () {
       this.render();
     },
-
 
     render: function () {
       app.urlMappings.fetchLocallyStoredUrls();
@@ -32,6 +24,10 @@ var app = app || {};
       app.urlMappings.each(function(model){
         _this.appendNewUrlToUI(model);
       });
+      if(app.urlMappings.length > 0){
+        this.$el.find('.history').removeClass('hidden');
+      }
+
     },
 
     createOnEnter: function(e) {
@@ -56,7 +52,7 @@ var app = app || {};
       app.urlMappings.reset(null);
       app.urlMappings.clearLocallyStoredUrls();
       this.$el.find('.shortened-url , .orignal-url').remove();
-
+      this.$el.find('.history').addClass('hidden');
     },
     addNewUrl: function(model){
       app.urlMappings.addNewUrl(model);
@@ -68,6 +64,7 @@ var app = app || {};
       this.$el.find('.url-list.table').find('tbody').append(urlMappingView.render());
       urlMappingView.bindEvents();
       urlMappingView.model.fetch();
+      this.$el.find('.history').removeClass('hidden');
     },
     newAttributes: function () {
       return {
