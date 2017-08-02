@@ -35,7 +35,7 @@ var app = app || {};
       return url;
     },
     clickableUrl: function(){
-      return window.location.host + '/' + this.get('shortcode');
+      return window.location.href + this.get('shortcode');
     },
     displayableDate: function(date){
       if(_.isEmpty(date)){
