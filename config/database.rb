@@ -22,14 +22,14 @@ ActiveRecord::Base.configurations[:development] = {
   :port      => 5432
 
 }
-
+db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/shooooort_production')
 ActiveRecord::Base.configurations[:production] = {
   :adapter   => 'postgresql',
-  :database  => 'production_database',
-  :username  => 'production_username',
-  :password  => 'production_password',
-  :host      => 'production_host',
-  :port      => 5432
+  :database  =>  db.path[1..-1],
+  :username  =>  db.user,
+  :password  =>  db.password,
+  :host      =>  db.host,
+  :port      =>  5432
 
 }
 
