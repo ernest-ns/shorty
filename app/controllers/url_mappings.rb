@@ -25,6 +25,7 @@ Shooooort::Shorty.controllers :url_mappings do
     url_mapping = UrlMapping.create({url: request_body[:url], shortcode: request_body[:shortcode]})
 
     halt 400, {error: 400, description: UrlMapping.url_is_not_present_error_message}.to_json if url_mapping.url_is_not_present?
+    halt 400, {error: 400, description: UrlMapping.url_is_invalid_error_message}.to_json  if url_mapping.invalid_url?
     halt 422, {error: 422, description: url_mapping.shortcode_regex_mismatch_error_message }.to_json unless url_mapping.shortcode_matches_regex?
     halt 409, {error: 409, description: url_mapping.shortcode_already_in_use_error_message }.to_json if url_mapping.shortcode_already_in_use?
 

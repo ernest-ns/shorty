@@ -23,12 +23,26 @@ RSpec.describe "/url_mappings" do
       end
     end
 
+    context "the url is not valid" do
+      let(:invalid_url) {"www.example.com"}
+      it "does not create a url mapping" do
+        expect(lambda {post "/shorten", { "url" => invalid_url }.to_json}).to change{UrlMapping.count}.by(0)
+      end
+
+      it "returns a 400 status" do
+        post "/shorten", {"url" => invalid_url }.to_json
+        expect(last_response.status).to eq 400
+        error_description = JSON.parse(last_response.body)["description"]
+        expect(error_description).to eq("url is not valid")
+      end
+    end
+
     context "shortcode is already in use" do
       before(:each) do
         UrlMapping.create({url: "https://www.example.org", shortcode: random_shortcode})
       end
       it "does not create a url mapping" do
-        expect(lambda {post "/shorten", { "url" => "www.example.org","shortcode" => random_shortcode }.to_json}).to change{UrlMapping.count}.by(0)
+        expect(lambda {post "/shorten", { "url" => "http://www.example.org","shortcode" => random_shortcode }.to_json}).to change{UrlMapping.count}.by(0)
       end
 
       it "returns a 409 status" do
@@ -42,7 +56,7 @@ RSpec.describe "/url_mappings" do
     context "the shortcode is not valid" do
       let(:invalid_shortcode) {"abc"}
       it "does not create a url mapping" do
-        expect(lambda {post "/shorten", { "url" => "www.example.org","shortcode" => invalid_shortcode }.to_json}).to change{UrlMapping.count}.by(0)
+        expect(lambda {post "/shorten", { "url" => "http://www.example.org","shortcode" => invalid_shortcode }.to_json}).to change{UrlMapping.count}.by(0)
       end
 
       it "returns a 422 status" do

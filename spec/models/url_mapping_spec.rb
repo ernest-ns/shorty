@@ -49,14 +49,14 @@ RSpec.describe UrlMapping do
       expect(url_mapping.errors[:url].include?("url is not present")).to be true
     end
 
-    xit "validates that the url is of type URL" do
+    it "validates that the url is of type URL" do
       url_mapping.valid?
       expect(url_mapping.errors[:url].include?("is invalid")).to be false
 
 
       url_mapping = UrlMapping.new({url: "meh"})
       url_mapping.valid?
-      expect(url_mapping.errors[:url].include?("is invalid")).to be true
+      expect(url_mapping.errors[:url].include?("url is not valid")).to be true
 
     end
     it "Validates that the shortcord follows the pattern" do

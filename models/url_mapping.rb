@@ -6,7 +6,7 @@ class UrlMapping < ActiveRecord::Base
   validates :shortcode, uniqueness: {message: Proc.new { |url_mapping| url_mapping.shortcode_already_in_use_error_message } }
   validate :shortcode_follows_format
   validates :url, presence: {message: Proc.new { url_is_not_present_error_message } }
-#  validates :url, format: { with: URI.regexp }, if: 'url.present?'
+  validates :url, format: { with: URI.regexp, message: Proc.new {url_is_invalid_error_message} }, if: 'url.present?'
 
   def generate_start_date
     self.start_date = Time.now if self.start_date.blank?
@@ -64,7 +64,15 @@ class UrlMapping < ActiveRecord::Base
     self.errors[:url].include?(UrlMapping.url_is_not_present_error_message)
   end
 
+  def invalid_url?
+    self.errors[:url].include?(UrlMapping.url_is_invalid_error_message)
+  end
+
   def self.url_is_not_present_error_message
     "url is not present"
+  end
+
+  def self.url_is_invalid_error_message
+    "url is not valid"
   end
 end
