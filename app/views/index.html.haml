@@ -1,18 +1,19 @@
 .main-container
-  .from-container.col-md-12.col-sm-12.col-lg-12
+  .from-container.col-md-12.col-sm-12.col-lg-12.col-xs-12
     .form
-      .url.col-md-9.col-sm-9.col-lg-9
+      .url.col-md-9.col-lg-9.col-xs-12.col-sm-8.col-sm-offset-2.col-md-offset-0
         %input{:placeholder => "Paste the link you want to shorten here", :class => "url-field rounded-borders form-control", :type=>"text", :required => true}
-      .action.col-md-3.col-sm-3.col-lg-3
+      .action.col-md-3.col-lg-3.col-xs-12.col-sm-8.col-sm-offset-2.col-md-offset-0
         %input{:class => "submit-button rounded-borders btn", :type=>"button", :value => "Shorten this link"}
-  .history.col-md-12.col-sm-12.col-lg-12
-    .header.col-md-8
-      .heading.col-md-8 Previously shortened by you
-      .clear-history.col-md-4 Clear history
-    %table.url-list.table
-      %thead
-        %tr
-          %th.col-md-8 LINK
-          %th.col-md-2.text-center VISITS
-          %th.col-md-2.text-center LAST VISITED
-      %tbody
+  .history.col-md-12.col-sm-12.col-lg-12.col-xs-12
+    .header.col-md-8.col-xs-12.col-sm-12
+      .heading.col-md-8.col-xs-12.col-sm-6 Previously shortened by you
+      .clear-history.col-md-4.col-xs-12.xs-center.col-sm-6 Clear history
+    .table-responsive.col-sm-12
+      %table.url-list.table
+        %thead
+          %tr
+            %th.col-md-8 LINK
+            %th.col-md-2.text-center VISITS
+            %th.col-md-2.text-center LAST VISITED
+        %tbody

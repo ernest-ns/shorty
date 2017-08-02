@@ -9,14 +9,14 @@
     = yield_content :include
     %body
       #header.container
-        .left-space.col-md-2.col-lg-2.col-sm-2.col-xs-2
-        .content-area.col-md-8.col-lg-8.col-sm-8.col-xs.2
+        .left-space.col-lg-2.col-sm-2.hidden-xs.hidden-sm.hidden-md
+        .content-area.col-md-12.col-lg-8.col-sm-12.col-xs-12
           .website-name
-            .website-title.col-md-7.col-lg-7 Shooooort
-            .website-tagline.col-md-5.col-lg-5.text-right The link shortner with a long name
-        .right-space.col-md-2.col-lg-2.col-sm-2.col-xs-2
+            .website-title.col-md-7.col-lg-7.col-sm-12.col-xs-12.xs-center.sm-center Shooooort
+            .website-tagline.col-md-5.col-lg-5.col-sm-12.col-xs-12.text-right.xs-center.sm-center The link shortner with a long name
+        .right-space.col-lg-2.col-sm-2.hidden-xs.hidden-sm.hidden-md
       #container.container
-        .left-space.col-md-2.col-lg-2.col-sm-2.col-xs-2
-        .content-area.col-md-8.col-lg-8.col-sm-8.col-xs.2
+        .left-space.hidden-md.col-lg-2.col-sm-2.hidden-xs.hidden-sm
+        .content-area.col-md-12.col-lg-8.col-sm-12.col-xs-12
           #main= yield
-        .right-space.col-md-2.col-lg-2.col-sm-2.col-xs-2
+        .right-space.hidden-md.col-lg-2.col-sm-2.hidden-xs.hidden-sm
