@@ -17,7 +17,7 @@ ActiveRecord::Base.configurations[:development] = {
   :adapter   => 'postgresql',
   :database  => 'shooooort_development',
   :username  => 'vagrant',
-  :password  => '',
+  :password  => 'password',
   :host      => 'localhost',
   :port      => 5432
 
@@ -25,10 +25,10 @@ ActiveRecord::Base.configurations[:development] = {
 
 ActiveRecord::Base.configurations[:production] = {
   :adapter   => 'postgresql',
-  :database  => 'dbib4fu3a3qv6u',
-  :username  => 'ggtabttvxhlblu',
-  :password  => 'b8ad1ae7311f02918ce0c3b086756734a6c93ac542b9ebcba868f674553ef2c7',
-  :host      => 'ec2-107-20-188-239.compute-1.amazonaws.com',
+  :database  => 'production_database',
+  :username  => 'production_username',
+  :password  => 'production_password',
+  :host      => 'production_host',
   :port      => 5432
 
 }
