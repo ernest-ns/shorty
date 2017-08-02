@@ -1,24 +1,5 @@
 Shooooort::Shorty.controllers :url_mappings do
 
-  # get :index, :map => '/foo/bar' do
-  #   session[:foo] = 'bar'
-  #   render 'index'
-  # end
-
-  # get :sample, :map => '/sample/url', :provides => [:any, :js] do
-  #   case content_type
-  #     when :js then ...
-  #     else ...
-  # end
-
-  # get :foo, :with => :id do
-  #   "Maps to url '/foo/#{params[:id]}'"
-  # end
-
-  # get '/example' do
-  #   'Hello world!'
-  # end
-
   get :show, :map => '/:shortcode', :provides => [:json] do
     content_type :json
 
@@ -43,18 +24,9 @@ Shooooort::Shorty.controllers :url_mappings do
 
     url_mapping = UrlMapping.create({url: request_body[:url], shortcode: request_body[:shortcode]})
 
-    unless(url_mapping.errors[:url].blank?)
-      halt 400, {error: 400, description: url_mapping.errors[:url].join(",")}.to_json
-    end
-
-    if(url_mapping.errors[:shortcode].include?("The shortcode fails to meet the following regexp: ^[0-9a-zA-Z_]{4,}$"))
-      halt 422, {error: 422, description:"The shortcode fails to meet the following regexp: ^[0-9a-zA-Z_]{4,}$" }.to_json
-    end
-
-
-    if(url_mapping.errors[:shortcode].include?("The the desired shortcode is already in use. Shortcodes are case-sensitive."))
-      halt 409, {error: 409, description:"The the desired shortcode is already in use. Shortcodes are case-sensitive." }.to_json
-    end
+    halt 400, {error: 400, description: UrlMapping.url_is_not_present_error_message}.to_json if url_mapping.url_is_not_present?
+    halt 422, {error: 422, description: url_mapping.shortcode_regex_mismatch_error_message }.to_json unless url_mapping.shortcode_matches_regex?
+    halt 409, {error: 409, description: url_mapping.shortcode_already_in_use_error_message }.to_json if url_mapping.shortcode_already_in_use?
 
     status 201
     {"shortcode" => url_mapping.shortcode}.to_json

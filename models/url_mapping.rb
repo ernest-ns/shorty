@@ -3,9 +3,9 @@ class UrlMapping < ActiveRecord::Base
   before_create :generate_start_date
   before_create :assign_shortcode
 
-  validates :shortcode, uniqueness: {message: "The the desired shortcode is already in use. Shortcodes are case-sensitive."}
+  validates :shortcode, uniqueness: {message: Proc.new { |url_mapping| url_mapping.shortcode_already_in_use_error_message } }
   validate :shortcode_follows_format
-  validates :url, presence: {message: "url is not present"}
+  validates :url, presence: {message: Proc.new { url_is_not_present_error_message } }
 #  validates :url, format: { with: URI.regexp }, if: 'url.present?'
 
   def generate_start_date
@@ -42,5 +42,29 @@ class UrlMapping < ActiveRecord::Base
     unless ShortcodeValidator.valid?(shortcode)
       errors.add(:shortcode, "The shortcode fails to meet the following regexp: ^[0-9a-zA-Z_]{4,}$")
     end
+  end
+
+  def shortcode_matches_regex?
+    !self.errors[:shortcode].include?(shortcode_regex_mismatch_error_message)
+  end
+
+  def shortcode_regex_mismatch_error_message
+    "The shortcode fails to meet the following regexp: ^[0-9a-zA-Z_]{4,}$"
+  end
+
+  def shortcode_already_in_use?
+    self.errors[:shortcode].include?(shortcode_already_in_use_error_message)
+  end
+
+  def shortcode_already_in_use_error_message
+    "The the desired shortcode is already in use. Shortcodes are case-sensitive."
+  end
+
+  def url_is_not_present?
+    self.errors[:url].include?(UrlMapping.url_is_not_present_error_message)
+  end
+
+  def self.url_is_not_present_error_message
+    "url is not present"
   end
 end
